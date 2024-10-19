@@ -1,13 +1,13 @@
 import React from 'react';
-import TaxHistoryWidget from './TaxHistoryWidget';
-import './App.css'; // Optional, for any global styles
+import BankReliabilityWidget from './components/BankReliabilityWidget';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <TaxHistoryWidget />
+    <div>
+      <h1>Corporate Clients Portal</h1>
+      <BankReliabilityWidget />
     </div>
   );
-}
+};
 
 export default App;
