@@ -41,10 +41,9 @@ const Widget = () => {
     <div className={`widget ${isExpanded ? 'expanded' : ''}`}>
       <div className={`mascot ${isExpanded ? 'small' : ''}`}>
         <img src={commerzduck} alt="commerzduck" />
-        <button className='widget__button' onClick={handleClick}>Accountant</button>
-      </div>
+        <button className={`widget__button ${isExpanded ? 'hidden' : ''}`} onClick={handleClick}>Accountant</button>
 
-      {(!hasInput || isEditing) && isExpanded && (
+        {(!hasInput || isEditing) && isExpanded && (
         <form onSubmit={handleInputSubmit} className="input__form">
           <label htmlFor="inputField" className='input__form__label'>Please input the companies salary:</label>
           <input 
@@ -56,7 +55,7 @@ const Widget = () => {
             className='input__form__input'
           />
           {errorMessage && <p className="error-message">{errorMessage}</p>}
-          <button type="submit" className='input__form__button'>Submit</button>
+          <button type='submit' className='widget__button'>Submit</button>
         </form>
       )}
 
@@ -68,9 +67,12 @@ const Widget = () => {
             <li><a href="#" className='widget__option'>Debt Check</a></li>
             <li><a href="#" className='widget__option'>History</a></li>
           </ul>
-          <button className='edit-input-btn' onClick={handleEditInput}>Edit Input</button>
+          <div className='widget__salary'>
+          <p>On a salary of </p><span onClick={handleEditInput}> {inputValue}€ Back</span>
+          </div>
         </div>
       )}
+      </div>
     </div>
   );
 };

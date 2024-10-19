@@ -37,7 +37,7 @@
 
 
 .widget__button {
-  margin-top: 10px;
+  margin: 20px 0;
   font-family: "Poppins", sans-serif;
   padding: 0.6em 2em;
   border: none;
@@ -136,6 +136,15 @@
   scale: 1.2;
 }
 
+.widget__salary {
+  display: flex;
+  justify-content: space-between;
+}
+
+.widget__salary span {
+  cursor: pointer;
+}
+
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -148,6 +157,19 @@
 }
 
 
-.input__form__button {
+.input__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
 
+.input__form__input {
+  width: 100%;
+  padding: 5px 10px;
+  -moz-appearance: textfield;
+}
+
+.hidden {
+  display: none;
 }
