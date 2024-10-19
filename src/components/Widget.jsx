@@ -68,7 +68,7 @@ const Widget = () => {
             <li><a href="#" className='widget__option'>History</a></li>
           </ul>
           <div className='widget__salary'>
-          <p>On a salary of </p><span onClick={handleEditInput}> {inputValue}€ Back</span>
+          <p>On a salary of <span onClick={handleEditInput}> {inputValue}€ Back</span></p>
           </div>
         </div>
       )}
