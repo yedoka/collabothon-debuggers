@@ -1,6 +1,7 @@
 import logo from "./assets/logo.png";
 import "./index.css";
 import Widget from "./components/Widget";
+import DebtStatusWidget from "./components/DebtStatusWidget";
 
 const App = () => {
   return (
@@ -41,8 +42,9 @@ const App = () => {
           </nav>
         </header>
 
-        <main className="flex-grow container mx-auto p-6 font-roboto">
+        <main className="flex gap-8 flex-grow container mx-auto p-6 font-roboto">
           <Widget />
+          <DebtStatusWidget />
         </main>
       </div>
     </>
