@@ -5,6 +5,7 @@ import {
   FaHistory,
   FaChartBar,
   FaFileInvoice,
+  FaExchangeAlt, // Updated icon for currency transactions
 } from "react-icons/fa";
 import commerzduck from "../assets/commerzduck.png";
 import commerzduckExpanded from "../assets/commerzduckExpanded.png"; // New image for expanded state
@@ -12,6 +13,7 @@ import DebtStatusWidget from "./DebtStatusWidget";
 import TaxHistoryWidget from "./TaxHistoryWidget";
 import TaxOverview from "./TaxOverview";
 import TaxFormsWidget from "./TaxFormsWidget";
+import MultiCurrencyTransaction from "./Currency"; // Import the new widget
 
 const Widget = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -31,6 +33,10 @@ const Widget = () => {
         return <TaxOverview onClose={() => toggleWidget("overview")} />;
       case "forms":
         return <TaxFormsWidget onClose={() => toggleWidget("forms")} />;
+      case "currency": // New case for the MultiCurrencyTransaction widget
+        return (
+          <MultiCurrencyTransaction onClose={() => toggleWidget("currency")} />
+        );
       default:
         return null;
     }
@@ -76,6 +82,11 @@ const Widget = () => {
                 { label: "Tax History", icon: FaHistory, widget: "history" },
                 { label: "Tax Overview", icon: FaChartBar, widget: "overview" },
                 { label: "Tax Forms", icon: FaFileInvoice, widget: "forms" },
+                {
+                  label: "Currency Transactions",
+                  icon: FaExchangeAlt, // Changed icon for currency transactions
+                  widget: "currency",
+                },
               ].map(({ label, icon: Icon, widget }) => (
                 <button
                   key={widget}
