@@ -80,7 +80,7 @@ const Widget = () => {
                 <button
                   key={widget}
                   onClick={() => toggleWidget(widget)}
-                  className={`bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out transform hover:scale-105 shadow-md p-2 flex flex-col items-center rounded-lg text-xs border border-orange-500 bg-orange-100 ${
+                  className={`hover:bg-gray-100 transition-transform duration-300 ease-in-out transform hover:scale-105 shadow-md p-2 flex flex-col items-center rounded-lg text-xs border border-orange-500 bg-orange-100 ${
                     activeWidget === widget ? "bg-gray-200" : ""
                   }`}
                   title={label}
