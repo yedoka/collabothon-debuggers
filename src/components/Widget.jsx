@@ -39,14 +39,14 @@ const Widget = () => {
     <div className="flex">
       <div
         className={`transition-all duration-300 ease-in-out flex flex-col items-center justify-center border bg-white rounded-lg shadow-lg w-72 ${
-          isExpanded ? "h-72" : "h-48"
+          isExpanded ? "h-96" : "h-64"
         }`}
       >
-        <div className="flex flex-col items-center mb-4">
+        <div className="flex flex-col items-center my-4">
           <img
             src={commerzduck}
             alt="commerzduck"
-            className="w-24 transition-all duration-300 ease-in-out"
+            className="w-36 transition-all duration-300 ease-in-out"
           />
           {!isExpanded && (
             <button
@@ -85,7 +85,9 @@ const Widget = () => {
                   title={label}
                 >
                   <Icon size={20} className="text-orange-500 mb-1" />
-                  <span className="text-xs font-medium text-gray-700">{label}</span>
+                  <span className="text-xs font-medium text-gray-700">
+                    {label}
+                  </span>
                 </button>
               ))}
             </div>
