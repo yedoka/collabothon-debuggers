@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaSearch, FaFileCsv } from "react-icons/fa";
+import { FaSearch, FaFileCsv, FaTimes } from "react-icons/fa";
 
 const taxHistoryData = [
   {
@@ -34,7 +34,8 @@ const taxHistoryData = [
   },
 ];
 
-function TaxHistoryWidget() {
+// eslint-disable-next-line react/prop-types
+function TaxHistoryWidget({ onClose }) {
   const [selectedType, setSelectedType] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -69,7 +70,15 @@ function TaxHistoryWidget() {
   };
 
   return (
-    <div className="w-80 p-4 bg-white rounded-lg shadow-md border">
+    <div className="relative w-80 p-4 bg-white rounded-lg shadow-md border">
+      {/* Кнопка закрытия в левом верхнем углу */}
+      <button
+        className="absolute top-2 right-2 text-gray-500 hover:text-red-500 transition-colors duration-300 ease-in-out"
+        onClick={onClose}
+      >
+        <FaTimes size={18} />
+      </button>
+
       <h2 className="text-xl font-semibold mb-3">Tax History</h2>
 
       <div className="mb-4">

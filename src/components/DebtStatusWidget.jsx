@@ -1,18 +1,28 @@
-import { useState } from "react";
 import {
+  FaTimes,
   FaMoneyBillWave,
   FaRegClipboard,
   FaCalendarCheck,
 } from "react-icons/fa";
+import { useState } from "react";
 
-function DebtStatusWidget() {
+// eslint-disable-next-line react/prop-types
+function DebtStatusWidget({ onClose }) {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const toggleNotifications = () => {
     setIsNotificationsOpen(!isNotificationsOpen);
   };
 
   return (
-    <div className="w-96 h-auto p-4 bg-white rounded-lg shadow-md border flex flex-col justify-between">
+    <div className="relative w-96 h-auto p-4 bg-white rounded-lg shadow-md border flex flex-col justify-between">
+      {/* Кнопка закрытия в левом верхнем углу */}
+      <button
+        className="absolute top-2 right-2 text-gray-500 hover:text-red-500 transition-colors duration-300 ease-in-out"
+        onClick={onClose}
+      >
+        <FaTimes size={18} />
+      </button>
+
       <div>
         <h2 className="text-xl font-semibold mb-3">Debt Status</h2>
         <div className="my-2 border-b border-gray-300"></div>
