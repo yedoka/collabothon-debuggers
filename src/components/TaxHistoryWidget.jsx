@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaSearch, FaFileCsv } from "react-icons/fa";
+import { FaSearch, FaFileCsv, FaTimes } from "react-icons/fa";
 
 const taxHistoryData = [
   {
@@ -71,7 +71,7 @@ const taxHistoryData = [
   },
 ];
 
-function TaxHistoryWidget() {
+function TaxHistoryWidget({ onClose }) {
   const [selectedType, setSelectedType] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -106,7 +106,15 @@ function TaxHistoryWidget() {
   };
 
   return (
-    <div className="w-96 p-4 bg-white rounded-lg shadow-md border">
+    <div className="w-96 p-4 bg-white rounded-lg shadow-md border relative">
+      {/* Close button */}
+      <button
+        className="absolute top-2 right-2 text-gray-500 hover:text-red-500 transition-colors duration-300 ease-in-out"
+        onClick={onClose}
+      >
+        <FaTimes size={18} />
+      </button>
+
       <h2 className="text-xl font-semibold mb-3">Tax History</h2>
 
       <div className="mb-4">
