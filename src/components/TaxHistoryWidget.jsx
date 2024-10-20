@@ -32,6 +32,43 @@ const taxHistoryData = [
     amount: 950.0,
     status: "Paid",
   },
+  // More tax history entries for mock data
+  {
+    date: "2023-05-10",
+    type: "Corporate Tax",
+    amount: 1300.0,
+    status: "Paid",
+  },
+  {
+    date: "2023-03-15",
+    type: "Income Tax",
+    amount: 1100.0,
+    status: "Paid",
+  },
+  {
+    date: "2023-01-20",
+    type: "Value Added Tax (VAT)",
+    amount: 900.0,
+    status: "Paid",
+  },
+  {
+    date: "2022-12-15",
+    type: "Property Tax",
+    amount: 700.0,
+    status: "Paid",
+  },
+  {
+    date: "2022-10-10",
+    type: "Corporate Tax",
+    amount: 1250.0,
+    status: "Pending",
+  },
+  {
+    date: "2022-09-01",
+    type: "Income Tax",
+    amount: 950.5,
+    status: "Paid",
+  },
 ];
 
 function TaxHistoryWidget() {
@@ -69,7 +106,7 @@ function TaxHistoryWidget() {
   };
 
   return (
-    <div className="w-80 p-4 bg-white rounded-lg shadow-md border">
+    <div className="w-96 p-4 bg-white rounded-lg shadow-md border">
       <h2 className="text-xl font-semibold mb-3">Tax History</h2>
 
       <div className="mb-4">
@@ -96,7 +133,8 @@ function TaxHistoryWidget() {
         </select>
       </div>
 
-      <div className="overflow-x-auto">
+      {/* Scrollable table container */}
+      <div className="max-h-64 overflow-y-auto border border-gray-300 rounded-md">
         <table className="min-w-full">
           <thead>
             <tr className="bg-gray-200">
