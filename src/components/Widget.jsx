@@ -14,14 +14,11 @@ import TaxFormsWidget from "./TaxFormsWidget";
 
 const Widget = () => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [activeWidgets, setActiveWidgets] = useState([]);
+  const [activeWidget, setActiveWidget] = useState(null); // Changed to store a single widget
 
   const toggleWidget = (widget) => {
-    setActiveWidgets((prev) =>
-      prev.includes(widget)
-        ? prev.filter((item) => item !== widget)
-        : [...prev, widget]
-    );
+    // If the same widget is clicked again, close it; otherwise, open the new one
+    setActiveWidget((prev) => (prev === widget ? null : widget));
   };
 
   const renderActiveWidget = (widget) => {
@@ -79,7 +76,9 @@ const Widget = () => {
             <div className="grid grid-cols-2 gap-2 mt-4">
               <button
                 onClick={() => toggleWidget("debt")}
-                className="bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out shadow-md py-2 px-2 flex flex-col items-center rounded-lg text-xs"
+                className={`bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out shadow-md py-2 px-2 flex flex-col items-center rounded-lg text-xs ${
+                  activeWidget === "debt" ? "bg-gray-200" : ""
+                }`}
               >
                 <FaMoneyBillWave size={20} className="text-orange-500 mb-1" />
                 <span className="text-xs font-medium text-gray-700">
@@ -88,7 +87,9 @@ const Widget = () => {
               </button>
               <button
                 onClick={() => toggleWidget("history")}
-                className="bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out shadow-md py-2 px-2 flex flex-col items-center rounded-lg text-xs"
+                className={`bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out shadow-md py-2 px-2 flex flex-col items-center rounded-lg text-xs ${
+                  activeWidget === "history" ? "bg-gray-200" : ""
+                }`}
               >
                 <FaHistory size={20} className="text-orange-500 mb-1" />
                 <span className="text-xs font-medium text-gray-700">
@@ -97,7 +98,9 @@ const Widget = () => {
               </button>
               <button
                 onClick={() => toggleWidget("overview")}
-                className="bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out shadow-md py-2 px-2 flex flex-col items-center rounded-lg text-xs"
+                className={`bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out shadow-md py-2 px-2 flex flex-col items-center rounded-lg text-xs ${
+                  activeWidget === "overview" ? "bg-gray-200" : ""
+                }`}
               >
                 <FaChartBar size={20} className="text-orange-500 mb-1" />
                 <span className="text-xs font-medium text-gray-700">
@@ -106,7 +109,9 @@ const Widget = () => {
               </button>
               <button
                 onClick={() => toggleWidget("forms")}
-                className="bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out shadow-md py-2 px-2 flex flex-col items-center rounded-lg text-xs"
+                className={`bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out shadow-md py-2 px-2 flex flex-col items-center rounded-lg text-xs ${
+                  activeWidget === "forms" ? "bg-gray-200" : ""
+                }`}
               >
                 <FaFileInvoice size={20} className="text-orange-500 mb-1" />
                 <span className="text-xs font-medium text-gray-700">
@@ -118,13 +123,13 @@ const Widget = () => {
         )}
       </div>
 
-      {/* Контейнер для активных виджетов справа */}
+      {/* Контейнер для активного виджета справа */}
       <div className="flex flex-wrap gap-4 ml-4">
-        {activeWidgets.map((widget) => (
-          <div key={widget} className="w-72">
-            {renderActiveWidget(widget)}
+        {activeWidget && (
+          <div key={activeWidget} className="w-72">
+            {renderActiveWidget(activeWidget)}
           </div>
-        ))}
+        )}
       </div>
     </div>
   );
