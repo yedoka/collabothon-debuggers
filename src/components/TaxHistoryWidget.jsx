@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaSearch, FaFileCsv, FaTimes } from "react-icons/fa";
 
 const taxHistoryData = [
@@ -75,6 +75,12 @@ const taxHistoryData = [
 function TaxHistoryWidget({ onClose }) {
   const [selectedType, setSelectedType] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+  const [isVisible, setIsVisible] = useState(false); // State for visibility
+
+  // Trigger visibility when the component mounts
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const filteredTaxHistory = taxHistoryData.filter((tax) => {
     const matchesType = selectedType === "All" || tax.type === selectedType;
@@ -107,9 +113,13 @@ function TaxHistoryWidget({ onClose }) {
   };
 
   return (
-    <div className="w-[550px] p-4 bg-white rounded-lg shadow-md border relative">
+    <div
+      className={`w-[550px] p-4 bg-white rounded-3xl shadow-custom border relative transition-transform duration-300 ease-in-out ${
+        isVisible ? "translate-x-0" : "translate-x-full"
+      }`}
+    >
       <button
-        className="absolute top-2 right-2 text-gray-500 hover:text-red-500 transition-colors duration-300 ease-in-out"
+        className="absolute top-4 right-4 text-gray-500 hover:text-red-500 transition-colors duration-300 ease-in-out"
         onClick={onClose}
       >
         <FaTimes size={18} />

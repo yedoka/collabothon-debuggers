@@ -20,6 +20,7 @@ function TaxOverview({ onClose }) {
   ); // Selected account state
   const [showTaxes, setShowTaxes] = useState(false); // State to show/hide tax information
   const [paymentPeriod, setPaymentPeriod] = useState("monthly"); // State for payment period
+  const [isVisible, setIsVisible] = useState(false); // State for visibility
 
   // Calculate taxes based on salary and payment period
   const taxes =
@@ -70,10 +71,18 @@ function TaxOverview({ onClose }) {
     }
   }, [salary, noIncome]);
 
+  useEffect(() => {
+    setIsVisible(true); // Trigger animation on mount
+  }, []);
+
   return (
-    <div className="w-[500px] p-4 bg-white rounded-lg shadow-md border relative">
+    <div
+      className={`w-[500px] p-4 bg-white rounded-3xl shadow-custom border relative transition-all duration-300 ease-in-out ${
+        isVisible ? "translate-x-0" : "translate-x-full"
+      }`}
+    >
       <button
-        className="absolute top-2 right-2 text-gray-500 hover:text-red-500 transition-colors duration-300 ease-in-out"
+        className="absolute top-4 right-4 text-gray-500 hover:text-red-500 transition-colors duration-300 ease-in-out"
         onClick={onClose}
       >
         <FaTimes size={18} />
@@ -132,7 +141,7 @@ function TaxOverview({ onClose }) {
           maxHeight: showTaxes ? "500px" : "0",
           opacity: showTaxes ? "1" : "0",
           overflow: "hidden",
-          transition: "max-height 2.0s ease, opacity 1.5s ease",
+          transition: "max-height 0.5s ease, opacity 0.5s ease",
         }}
       >
         {!noIncome && salary && (

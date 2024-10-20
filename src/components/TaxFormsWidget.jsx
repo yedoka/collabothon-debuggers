@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 
 // eslint-disable-next-line react/prop-types
@@ -23,6 +23,12 @@ const TaxFormsWidget = ({ onClose }) => {
     notes: "",
   });
   const [showFormDetails, setShowFormDetails] = useState(false);
+  const [isVisible, setIsVisible] = useState(false); // State for visibility animation
+
+  // Trigger visibility animation on mount
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const handleFormSelect = (form) => {
     setSelectedForm(form);
@@ -72,9 +78,13 @@ const TaxFormsWidget = ({ onClose }) => {
   };
 
   return (
-    <div className="relative w-96 mx-auto p-2 bg-white rounded-lg shadow-md transition-all duration-300">
+    <div
+      className={`relative w-96 mx-auto p-4 bg-white rounded-3xl shadow-custom transition-all duration-300 ${
+        isVisible ? "translate-x-0" : "translate-x-full"
+      }`}
+    >
       <button
-        className="absolute top-2 right-2 text-gray-500 hover:text-red-500 transition-colors duration-300 ease-in-out"
+        className="absolute top-4 right-4 text-gray-500 hover:text-red-500 transition-colors duration-300 ease-in-out"
         onClick={onClose}
       >
         <FaTimes size={18} />
@@ -86,14 +96,13 @@ const TaxFormsWidget = ({ onClose }) => {
         {forms.map((form) => (
           <li
             key={form.id}
-            className={`p-2 border rounded-md transition-all duration-300 
-              ${
-                form.status === "completed"
-                  ? "bg-green-100"
-                  : form.status === "overdue"
-                  ? "bg-red-100"
-                  : "bg-yellow-100"
-              }`}
+            className={`p-2 border rounded-md transition-all duration-300 ${
+              form.status === "completed"
+                ? "bg-green-100"
+                : form.status === "overdue"
+                ? "bg-red-100"
+                : "bg-yellow-100"
+            }`}
           >
             <div className="flex justify-between items-center">
               <span className="font-bold">{form.name}</span>
@@ -115,7 +124,7 @@ const TaxFormsWidget = ({ onClose }) => {
             <div
               className={`mt-1 transition-all duration-300 ${
                 showFormDetails && selectedForm?.id === form.id
-                  ? "opacity-100"
+                  ? "opacity-100 h-auto"
                   : "opacity-0 h-0 overflow-hidden"
               }`}
             >
