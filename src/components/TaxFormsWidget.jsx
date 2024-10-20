@@ -1,10 +1,8 @@
 import { useState } from "react";
-import { FaTimes } from "react-icons/fa"; // Import the close icon
+import { FaTimes } from "react-icons/fa";
 
-// Enhanced Tax Forms Widget with Detailed Input Fields
 // eslint-disable-next-line react/prop-types
 const TaxFormsWidget = ({ onClose }) => {
-  // State to manage the forms
   const [forms, setForms] = useState([
     { id: 1, name: "VAT Form", status: "in-progress", details: "" },
     {
@@ -29,7 +27,7 @@ const TaxFormsWidget = ({ onClose }) => {
   const handleFormSelect = (form) => {
     setSelectedForm(form);
     setFormDetails({
-      taxNumber: "", // Reset fields for editing
+      taxNumber: "",
       income: "",
       deductions: "",
       dueDate: "",
@@ -75,7 +73,6 @@ const TaxFormsWidget = ({ onClose }) => {
 
   return (
     <div className="relative w-96 mx-auto p-2 bg-white rounded-lg shadow-md transition-all duration-300">
-      {/* Close button in the top-right corner */}
       <button
         className="absolute top-2 right-2 text-gray-500 hover:text-red-500 transition-colors duration-300 ease-in-out"
         onClick={onClose}

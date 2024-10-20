@@ -108,7 +108,6 @@ function TaxHistoryWidget({ onClose }) {
 
   return (
     <div className="w-[550px] p-4 bg-white rounded-lg shadow-md border relative">
-      {/* Close button */}
       <button
         className="absolute top-2 right-2 text-gray-500 hover:text-red-500 transition-colors duration-300 ease-in-out"
         onClick={onClose}
@@ -142,7 +141,6 @@ function TaxHistoryWidget({ onClose }) {
         </select>
       </div>
 
-      {/* Scrollable table container */}
       <div className="max-h-64 overflow-y-auto border border-gray-300 rounded-md">
         <table className="min-w-full">
           <thead>

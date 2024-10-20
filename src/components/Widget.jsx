@@ -9,7 +9,7 @@ import {
 import commerzduck from "../assets/commerzduck.png";
 import DebtStatusWidget from "./DebtStatusWidget";
 import TaxHistoryWidget from "./TaxHistoryWidget";
-import TaxOverview from "./TaxOverview"; // Correctly importing TaxOverview
+import TaxOverview from "./TaxOverview";
 import TaxFormsWidget from "./TaxFormsWidget";
 
 const Widget = () => {
@@ -27,7 +27,7 @@ const Widget = () => {
       case "history":
         return <TaxHistoryWidget onClose={() => toggleWidget("history")} />;
       case "overview":
-        return <TaxOverview onClose={() => toggleWidget("overview")} />; // Ensure this opens TaxOverview
+        return <TaxOverview onClose={() => toggleWidget("overview")} />;
       case "forms":
         return <TaxFormsWidget onClose={() => toggleWidget("forms")} />;
       default:
@@ -98,7 +98,7 @@ const Widget = () => {
       <div className="flex flex-wrap gap-4 ml-4">
         {activeWidget && (
           <div key={activeWidget} className="w-72">
-            {renderActiveWidget()} {/* Call the rendering function here */}
+            {renderActiveWidget()}
           </div>
         )}
       </div>

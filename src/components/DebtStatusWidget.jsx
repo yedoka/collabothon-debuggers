@@ -15,7 +15,6 @@ function DebtStatusWidget({ onClose }) {
 
   return (
     <div className="relative w-96 h-auto p-4 bg-white rounded-lg shadow-md border flex flex-col justify-between">
-      {/* Кнопка закрытия в левом верхнем углу */}
       <button
         className="absolute top-2 right-2 text-gray-500 hover:text-red-500 transition-colors duration-300 ease-in-out"
         onClick={onClose}

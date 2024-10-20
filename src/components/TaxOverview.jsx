@@ -72,7 +72,6 @@ function TaxOverview({ onClose }) {
 
   return (
     <div className="w-[500px] p-4 bg-white rounded-lg shadow-md border relative">
-      {/* Close button */}
       <button
         className="absolute top-2 right-2 text-gray-500 hover:text-red-500 transition-colors duration-300 ease-in-out"
         onClick={onClose}
@@ -93,7 +92,7 @@ function TaxOverview({ onClose }) {
           value={salary}
           onChange={(e) => {
             const value = e.target.value;
-            setSalary(value); // Set salary as string for controlled input
+            setSalary(value);
           }}
           placeholder="Enter the income amount"
           className="w-full border border-gray-300 p-2 rounded-lg mt-2 placeholder-gray-400"
@@ -115,7 +114,6 @@ function TaxOverview({ onClose }) {
         />
       </div>
 
-      {/* Payment Period Selector */}
       <div className="mb-4">
         <label className="block text-gray-700">Select payment period:</label>
         <select
@@ -129,13 +127,12 @@ function TaxOverview({ onClose }) {
         </select>
       </div>
 
-      {/* Smooth Transition for Taxes */}
       <div
         style={{
           maxHeight: showTaxes ? "500px" : "0",
           opacity: showTaxes ? "1" : "0",
           overflow: "hidden",
-          transition: "max-height 2.0s ease, opacity 1.5s ease", // Adjusted transition for smoother effect
+          transition: "max-height 2.0s ease, opacity 1.5s ease",
         }}
       >
         {!noIncome && salary && (
