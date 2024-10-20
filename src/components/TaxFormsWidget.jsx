@@ -1,0 +1,156 @@
+import { useState } from 'react';
+
+// Enhanced Tax Forms Widget with Detailed Input Fields
+const TaxFormsWidget = () => {
+  // State to manage the forms
+  const [forms, setForms] = useState([
+    { id: 1, name: 'VAT Form', status: 'in-progress', details: '' },
+    { id: 2, name: 'Income Tax Form', status: 'completed', details: 'Submitted on 2024-03-15' },
+    { id: 3, name: 'Corporate Tax Form', status: 'overdue', details: '' },
+  ]);
+
+  const [selectedForm, setSelectedForm] = useState(null);
+  const [formDetails, setFormDetails] = useState({
+    taxNumber: '',
+    income: '',
+    deductions: '',
+    dueDate: '',
+    notes: '',
+  });
+  const [showFormDetails, setShowFormDetails] = useState(false);
+
+  const handleFormSelect = (form) => {
+    setSelectedForm(form);
+    setFormDetails({
+      taxNumber: '', // Reset fields for editing
+      income: '',
+      deductions: '',
+      dueDate: '',
+      notes: '',
+    });
+    setShowFormDetails(true);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormDetails(prevDetails => ({
+      ...prevDetails,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = () => {
+    const updatedForms = forms.map(form =>
+      form.id === selectedForm.id
+        ? { ...form, status: 'completed', details: `Tax Number: ${formDetails.taxNumber}, Income: €${formDetails.income}, Deductions: €${formDetails.deductions}, Due Date: ${formDetails.dueDate}, Notes: ${formDetails.notes}` }
+        : form
+    );
+    setForms(updatedForms);
+    setShowFormDetails(false);
+    setSelectedForm(null);
+    setFormDetails({
+      taxNumber: '',
+      income: '',
+      deductions: '',
+      dueDate: '',
+      notes: '',
+    });
+  };
+
+  const handleDelete = (id) => {
+    const updatedForms = forms.filter(form => form.id !== id);
+    setForms(updatedForms);
+  };
+
+  return (
+    <div className="max-w-lg mx-auto p-2 bg-white rounded-lg shadow-md transition-all duration-300">
+      <h2 className="text-xl font-semibold mb-2">Tax Forms and Filings</h2>
+
+      <ul className="space-y-2">
+        {forms.map((form) => (
+          <li
+            key={form.id}
+            className={`p-2 border rounded-md transition-all duration-300 
+              ${form.status === 'completed' ? 'bg-green-100' : form.status === 'overdue' ? 'bg-red-100' : 'bg-yellow-100'}`}
+          >
+            <div className="flex justify-between items-center">
+              <span className="font-bold">{form.name}</span>
+              <div>
+                <button
+                  className="text-orange-500 hover:text-orange-600 mr-2"
+                  onClick={() => handleFormSelect(form)}
+                >
+                  {form.status === 'completed' ? 'View Details' : 'Edit'}
+                </button>
+                <button
+                  className="text-red-500 hover:underline"
+                  onClick={() => handleDelete(form.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+            <div className={`mt-1 transition-all duration-300 ${showFormDetails && selectedForm?.id === form.id ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
+              {form.details && <p>{form.details}</p>}
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      {showFormDetails && selectedForm && (
+        <div className="mt-2">
+          <h3 className="text-lg font-semibold">Fill Out {selectedForm.name}</h3>
+          <div className="space-y-2">
+            <input
+              type="text"
+              name="taxNumber"
+              placeholder="Tax Number"
+              value={formDetails.taxNumber}
+              onChange={handleInputChange}
+              className="w-full border border-gray-300 p-1 rounded-lg"
+            />
+            <input
+              type="number"
+              name="income"
+              placeholder="Income (€)"
+              value={formDetails.income}
+              onChange={handleInputChange}
+              className="w-full border border-gray-300 p-1 rounded-lg"
+            />
+            <input
+              type="number"
+              name="deductions"
+              placeholder="Deductions (€)"
+              value={formDetails.deductions}
+              onChange={handleInputChange}
+              className="w-full border border-gray-300 p-1 rounded-lg"
+            />
+            <input
+              type="date"
+              name="dueDate"
+              value={formDetails.dueDate}
+              onChange={handleInputChange}
+              className="w-full border border-gray-300 p-1 rounded-lg"
+            />
+            <textarea
+              name="notes"
+              placeholder="Additional Notes"
+              value={formDetails.notes}
+              onChange={handleInputChange}
+              className="w-full border border-gray-300 p-1 rounded-lg"
+              rows={3}
+            />
+          </div>
+          <button
+            className="mt-2 w-full bg-orange-500 hover:bg-orange-600 text-white py-1 rounded-lg transition-transform duration-300"
+            onClick={handleSubmit}
+          >
+            Submit {selectedForm.name}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default TaxFormsWidget;

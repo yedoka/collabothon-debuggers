@@ -1,93 +1,126 @@
-// DebtStatusWidget.jsx
-
-import { useState } from 'react';
+import { useState } from "react";
+import {
+  FaMoneyBillWave,
+  FaRegClipboard,
+  FaCalendarCheck,
+} from "react-icons/fa";
 
 function DebtStatusWidget() {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
-
   const toggleNotifications = () => {
     setIsNotificationsOpen(!isNotificationsOpen);
   };
 
   return (
-    <div className="max-w-lg p-4 bg-white rounded-lg shadow-xl">
-      <h2 className="text-xl font-bold">Debt Status</h2>
-
-      <div className="my-4 border-b border-gray-300"></div>
-
-      <div className="grid grid-cols-2 gap-4 mb-4">
-        <div>
-          <p className="text-lg font-medium">Total Debt</p>
-          <p className="text-2xl font-bold text-red-600">10,000 ₽</p>
-        </div>
-        <div>
-          <p className="text-lg font-medium">Remaining Balance</p>
-          <p className="text-2xl font-bold text-green-600">5,000 ₽</p>
-        </div>
-      </div>
-
-      <div className="flex flex-col space-y-4">
-        <div className="grid grid-cols-3 gap-4">
-          <div className="p-2 rounded-md bg-green-100">
-            <p className="text-md font-medium">Category 1</p>
-            <p className="text-xl font-bold text-green-700">1,000 ₽</p>
+    <div className="w-96 h-auto p-4 bg-white rounded-lg shadow-md border flex flex-col justify-between">
+      <div>
+        <h2 className="text-xl font-semibold mb-3">Debt Status</h2>
+        <div className="my-2 border-b border-gray-300"></div>
+        <div className="grid grid-cols-2 gap-2 mb-3">
+          <div>
+            <p className="text-md font-medium">Total Debt</p>
+            <p className="text-xl font-bold text-red-600">10,000 €</p>
           </div>
-          <div className="p-2 rounded-md bg-yellow-100">
-            <p className="text-md font-medium">Category 2</p>
-            <p className="text-xl font-bold text-yellow-700">2,000 ₽</p>
-          </div>
-          <div className="p-2 rounded-md bg-red-100">
-            <p className="text-md font-medium">Category 3</p>
-            <p className="text-xl font-bold text-red-700">3,000 ₽</p>
+          <div>
+            <p className="text-md font-medium">Remaining Balance</p>
+            <p className="text-xl font-bold text-green-600">5,000 €</p>
           </div>
         </div>
-      </div>
-
-      <div className="mb-4">
-        <div
-          className="text-md font-medium cursor-pointer select-none flex items-center"
-          onClick={toggleNotifications}
-        >
-          Notifications
-          <span className="ml-2">
-            {isNotificationsOpen ? (
-              <svg
-                className="w-4 h-4 transform rotate-180"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            ) : (
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
+        <div className="flex flex-col space-y-2 mb-3">
+          <div className="grid grid-cols-3 gap-2">
+            <div className="p-2 rounded-md bg-green-100 flex items-center">
+              <FaMoneyBillWave className="text-green-700 mr-3" />
+              <div>
+                <p className="text-sm font-bold">Loans</p>
+                <p className="text-md font-bold text-green-700">1,000 €</p>
+              </div>
+            </div>
+            <div className="p-2 rounded-md bg-yellow-100 flex items-center">
+              <FaRegClipboard className="text-yellow-700 mr-3" />
+              <div>
+                <p className="text-sm font-bold">Invoices</p>
+                <p className="text-md font-bold text-yellow-700">2,000 €</p>
+              </div>
+            </div>
+            <div className="p-2 rounded-md bg-red-100 flex items-center">
+              <FaCalendarCheck className="text-red-700 mr-3" />
+              <div>
+                <p className="text-sm font-bold">Taxes</p>
+                <p className="text-md font-bold text-red-700">3,000 €</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="mb-4">
+          <div
+            className="text-md font-medium cursor-pointer select-none flex items-center mt-2"
+            onClick={toggleNotifications}
+          >
+            Upcoming payments
+            <span className="ml-2">
+              {isNotificationsOpen ? (
+                <svg
+                  className="w-4 h-4 transform rotate-180"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              )}
+            </span>
+          </div>
+          <div
+            className={`overflow-hidden transition-all duration-300 ease-in-out ${
+              isNotificationsOpen ? "max-h-screen" : "max-h-0"
+            }`}
+          >
+            {isNotificationsOpen && (
+              <ul className="list-disc list-inside mt-2">
+                <li className="text-sm text-gray-600 mb-1">
+                  Tax payment due in 3 days
+                </li>
+                <li className="text-sm text-gray-600 mb-1">
+                  Loan payment overdue by 5 days
+                </li>
+                <li className="text-sm text-gray-600 mb-1">
+                  Invoice from Supplier X awaiting payment
+                </li>
+              </ul>
             )}
-          </span>
+          </div>
         </div>
-        {isNotificationsOpen && (
-          <ul className="list-disc list-inside mt-2">
-            <li className="text-sm text-gray-600 mb-1">Notification 1</li>
-            <li className="text-sm text-gray-600 mb-1">Notification 2</li>
-            <li className="text-sm text-gray-600 mb-1">Notification 3</li>
-          </ul>
-        )}
       </div>
-
-      <div className="flex justify-between items-center">
-        <button className="px-4 py-2 mr-2 text-white font-medium bg-blue-500 hover:bg-blue-600 rounded-md">
-          Action 1
+      <div className="flex justify-between items-center mt-3">
+        <button className="mt-2 font-poppins font-semibold text-white bg-orange-500 py-2 px-4 rounded-lg hover:bg-orange-600 text-sm">
+          Pay Now
         </button>
-        <button className="px-4 py-2 text-white font-medium bg-blue-500 hover:bg-blue-600 rounded-md">
-          Action 2
+        <button className="mt-2 font-poppins font-semibold text-black border border-gray-400 py-2 px-4 rounded-lg bg-white text-sm">
+          Set Up Reminder
+        </button>
+        <button className="mt-2 font-poppins font-semibold text-black bg-white py-2 px-4 rounded-lg text-sm">
+          View Details
         </button>
       </div>
     </div>

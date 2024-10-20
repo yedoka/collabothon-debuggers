@@ -11,10 +11,6 @@ export default {
         accent: '#F9B20A',
         primaryBackground: '#D9D9D9',
       },
-      fontFamily: {
-        roboto: ['Roboto', 'sans-serif'],
-        poppins: ['Poppins', 'sans-serif'],
-      },
     },
   },
   plugins: [],

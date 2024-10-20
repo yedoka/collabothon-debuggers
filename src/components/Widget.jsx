@@ -1,80 +1,130 @@
-import { useState } from 'react';
+import { useState } from "react";
+import {
+  FaTimes,
+  FaMoneyBillWave,
+  FaHistory,
+  FaChartBar,
+  FaFileInvoice,
+} from "react-icons/fa";
 import commerzduck from "../assets/commerzduck.png";
+import DebtStatusWidget from "./DebtStatusWidget";
+import TaxHistoryWidget from "./TaxHistoryWidget";
+import TaxOverview from "./TaxOverview";
+import TaxFormsWidget from "./TaxFormsWidget";
 
 const Widget = () => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [hasInput, setHasInput] = useState(false);
-  const [inputValue, setInputValue] = useState(''); 
-  const [isEditing, setIsEditing] = useState(false); 
-  const [errorMessage, setErrorMessage] = useState('');
+  const [activeWidgets, setActiveWidgets] = useState([]);
 
-  const handleClick = () => {
-    setIsExpanded(true);
-    if (!hasInput || isEditing) {
-      console.log('Input required or editing input');
-    } else {
-      console.log('Skip input, go directly to menu');
-    }
+  const toggleWidget = (widget) => {
+    setActiveWidgets((prev) =>
+      prev.includes(widget)
+        ? prev.filter((item) => item !== widget)
+        : [...prev, widget]
+    );
   };
 
-  const handleInputSubmit = (e) => {
-    e.preventDefault();
-    const parsedValue = parseInt(inputValue, 10);
-
-    if (isNaN(parsedValue) || parsedValue < 0) {
-      setErrorMessage('Please enter a valid positive integer.');
-    } else {
-      setHasInput(true); 
-      setIsEditing(false);  
-      setIsExpanded(true);  
-      setErrorMessage('');  
+  const renderActiveWidget = (widget) => {
+    switch (widget) {
+      case "debt":
+        return <DebtStatusWidget onClose={() => toggleWidget("debt")} />;
+      case "history":
+        return <TaxHistoryWidget onClose={() => toggleWidget("history")} />;
+      case "overview":
+        return <TaxOverview onClose={() => toggleWidget("overview")} />;
+      case "forms":
+        return <TaxFormsWidget onClose={() => toggleWidget("forms")} />;
+      default:
+        return null;
     }
-  };
-
-  const handleEditInput = () => {
-    setIsEditing(true);  
-    setIsExpanded(true); 
   };
 
   return (
-    <div className={`transition-all duration-700 ease-out flex flex-col items-center justify-center bg-white rounded-2xl shadow-lg ${isExpanded ? 'w-96 h-96 p-4' : 'w-64 h-64 p-5'} mt-24 ml-24`}>
-      <div className="flex flex-col items-center">
-        <img src={commerzduck} alt="commerzduck" className={`transition-all ${isExpanded ? 'w-36' : 'w-40'}`} />
-        <button className={`mt-5 font-poppins font-bold text-white bg-primary py-2 px-6 rounded-xl relative z-10 hover:scale-110 transition-transform duration-300 ${isExpanded ? 'hidden' : ''}`} onClick={handleClick}>
-          Accountant
-        </button>
-
-        {(!hasInput || isEditing) && isExpanded && (
-          <form onSubmit={handleInputSubmit} className="flex flex-col items-center gap-3 mt-4">
-            <label htmlFor="inputField" className="font-poppins">Please input the companies salary:</label>
-            <input 
-              id="inputField" 
-              type="number" 
-              value={inputValue} 
-              onChange={(e) => setInputValue(e.target.value)} 
-              min="0"
-              className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary w-full"
-            />
-            {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
-            <button type="submit" className="mt-2 bg-primary text-white py-2 px-5 rounded-xl font-poppins font-bold hover:scale-110 transition-transform">
-              Submit
+    <div className="flex">
+      {/* Основной виджет слева */}
+      <div
+        className={`transition-all duration-300 ease-in-out flex flex-col items-center justify-center border bg-white rounded-lg shadow-lg w-72 ${
+          isExpanded ? "h-72" : "h-48"
+        }`}
+      >
+        {/* Логотип и кнопка Accountant */}
+        <div className="flex flex-col items-center mb-4">
+          <img
+            src={commerzduck}
+            alt="commerzduck"
+            className="w-24 transition-all duration-300 ease-in-out"
+          />
+          {!isExpanded && (
+            <button
+              onClick={() => setIsExpanded(true)}
+              className="mt-3 font-poppins font-semibold text-white bg-orange-500 py-2 px-4 rounded-lg text-sm hover:bg-orange-600 transition-colors duration-300 ease-in-out"
+            >
+              Accountant
             </button>
-          </form>
-        )}
+          )}
+        </div>
 
-        {hasInput && !isEditing && isExpanded && (
-          <div className="flex flex-col items-center mt-4">
-            <ul className="space-y-3 font-poppins text-lg font-bold">
-              <li><a href="#" className="text-black hover:text-gray-500 transition-colors">Overview</a></li>
-              <li><a href="#" className="text-black hover:text-gray-500 transition-colors">Forms and Fill</a></li>
-              <li><a href="#" className="text-black hover:text-gray-500 transition-colors">Debt Check</a></li>
-              <li><a href="#" className="text-black hover:text-gray-500 transition-colors">History</a></li>
-            </ul>
-            <div className="mt-3 text-center font-poppins">
-              <p>On a salary of <span className="text-primary cursor-pointer" onClick={handleEditInput}>{inputValue}€ Back</span></p>
+        {/* Кнопки для переключения виджетов с иконками */}
+        {isExpanded && (
+          <div className="relative flex flex-col space-y-3 w-full">
+            {/* Иконка для закрытия меню (слева сверху) */}
+            <button
+              onClick={() => setIsExpanded(false)}
+              className="absolute top-2 left-2 p-1 text-gray-500 hover:text-red-500 transition-colors duration-300 ease-in-out"
+            >
+              <FaTimes size={18} />
+            </button>
+
+            {/* Кнопки для выбора виджетов */}
+            <div className="grid grid-cols-2 gap-2 mt-4">
+              <button
+                onClick={() => toggleWidget("debt")}
+                className="bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out shadow-md py-2 px-2 flex flex-col items-center rounded-lg text-xs"
+              >
+                <FaMoneyBillWave size={20} className="text-orange-500 mb-1" />
+                <span className="text-xs font-medium text-gray-700">
+                  Debt Status
+                </span>
+              </button>
+              <button
+                onClick={() => toggleWidget("history")}
+                className="bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out shadow-md py-2 px-2 flex flex-col items-center rounded-lg text-xs"
+              >
+                <FaHistory size={20} className="text-orange-500 mb-1" />
+                <span className="text-xs font-medium text-gray-700">
+                  Tax History
+                </span>
+              </button>
+              <button
+                onClick={() => toggleWidget("overview")}
+                className="bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out shadow-md py-2 px-2 flex flex-col items-center rounded-lg text-xs"
+              >
+                <FaChartBar size={20} className="text-orange-500 mb-1" />
+                <span className="text-xs font-medium text-gray-700">
+                  Tax Overview
+                </span>
+              </button>
+              <button
+                onClick={() => toggleWidget("forms")}
+                className="bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out shadow-md py-2 px-2 flex flex-col items-center rounded-lg text-xs"
+              >
+                <FaFileInvoice size={20} className="text-orange-500 mb-1" />
+                <span className="text-xs font-medium text-gray-700">
+                  Tax Forms
+                </span>
+              </button>
             </div>
           </div>
         )}
+      </div>
+
+      {/* Контейнер для активных виджетов справа */}
+      <div className="flex flex-wrap gap-4 ml-4">
+        {activeWidgets.map((widget) => (
+          <div key={widget} className="w-72">
+            {renderActiveWidget(widget)}
+          </div>
+        ))}
       </div>
     </div>
   );
