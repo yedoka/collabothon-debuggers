@@ -71,6 +71,7 @@ const taxHistoryData = [
   },
 ];
 
+// eslint-disable-next-line react/prop-types
 function TaxHistoryWidget({ onClose }) {
   const [selectedType, setSelectedType] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
