@@ -1,0 +1,114 @@
+.calendar {
+    background-color: #f9f9f9;  /* Light background for the widget */
+    border: 1px solid #ccc; /* Lighter border */
+    border-radius: 8px;
+    padding: 15px; /* Padding for the widget */
+    max-width: 600px;  /* Set a smaller maximum width for the calendar */
+    margin: auto; /* Center the widget */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #333; /* Dark text for visibility */
+    margin-bottom: 5px; /* Space below the header */
+}
+
+.nav-button {
+    background-color: #ff9800; /* Orange button background */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px;
+    padding: 10px; /* Adjusted padding for a smaller button */
+    width: 35px; /* Set a fixed width for square shape */
+    height: 35px; /* Set a fixed height for square shape */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Transition effect */
+    display: flex; /* Center the text inside the button */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.nav-button:hover {
+    background-color: #e68900; /* Darker orange background on hover */
+}
+
+
+.nav-button:hover {
+    background-color: #e68900; /* Darker orange background on hover */
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);  /* 7 columns for a week */
+    grid-template-rows: repeat(5, 1fr); /* 5 rows for a month */
+    gap: 5px; /* Space between cells */
+}
+
+.calendar-tile {
+    background-color: #fff;  /* White cell background */
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  /* Center items vertically */
+    align-items: center;
+    height: 70px;  /* Height for all tiles */
+    width: 70px;   /* Width for all tiles */
+    padding: 5px;  /* Padding inside the tiles */
+    color: #333; /* Dark text for visibility */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: background-color 0.3s; /* Transition effect */
+}
+
+.calendar-tile.empty {
+    background-color: #f0f0f0;  /* Light grey for empty cells */
+}
+
+.calendar-tile:hover {
+    background-color: #ffe0b2; /* Light orange background on hover */
+}
+
+.income {
+    color: #4caf50;  /* Green for income */
+    font-weight: bold;
+    font-size: 12px; /* Font size for income */
+}
+
+.date {
+    color: #333;  /* Dark text for date */
+    font-weight: bold;
+    font-size: 14px; /* Font size for date */
+}
+
+.tax {
+    color: #f44336;  /* Red for tax */
+    font-weight: bold;
+    font-size: 12px; /* Font size for tax */
+}
+
+/* Styles for non-current month days */
+.non-current-month {
+    background-color: #e8e8e8; /* Light grey background for non-current month cells */
+    color: #aaa; /* Darker text for non-current month */
+    font-size: 10px; /* Font size */
+}
+
+.week-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 columns for the week days */
+    margin-bottom: 5px; /* Space below the week days */
+}
+
+.week-day {
+    color: #333; /* Dark text for visibility */
+    font-weight: bold; /* Bold font */
+    text-align: center; /* Center the text */
+}
+
+/* Highlight today's date with a light orange background */
+.today {
+    background-color: #ffcc80; /* Light orange */
+    color: #333;
+    border: 2px solid #ff9800; /* Orange border for today's date */
+}

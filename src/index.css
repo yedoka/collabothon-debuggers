@@ -1,3 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Ваши пользовательские стили */
 body {
   background-color: #1a1a1a;  /* Dark background color for the entire app */
   color: #fff;                /* Set default text color to white */
