@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaSearch, FaFileCsv, FaTimes } from "react-icons/fa";
+import { FaSearch, FaFileCsv } from "react-icons/fa";
 
 const taxHistoryData = [
   {
@@ -71,8 +71,7 @@ const taxHistoryData = [
   },
 ];
 
-// eslint-disable-next-line react/prop-types
-function TaxHistoryWidget({ onClose }) {
+function TaxHistoryWidget() {
   const [selectedType, setSelectedType] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -107,7 +106,7 @@ function TaxHistoryWidget({ onClose }) {
   };
 
   return (
-    <div className="w-80 p-4 bg-white rounded-lg shadow-md border">
+    <div className="w-96 p-4 bg-white rounded-lg shadow-md border">
       <h2 className="text-xl font-semibold mb-3">Tax History</h2>
 
       <div className="mb-4">
