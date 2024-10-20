@@ -63,11 +63,11 @@ const Widget = () => {
 
         {/* Кнопки для переключения виджетов с иконками */}
         {isExpanded && (
-          <div className="relative flex flex-col space-y-3 w-full">
+          <div className="flex flex-col space-y-3 w-full p-4">
             {/* Иконка для закрытия меню (слева сверху) */}
             <button
               onClick={() => setIsExpanded(false)}
-              className="absolute top-2 left-2 p-1 text-gray-500 hover:text-red-500 transition-colors duration-300 ease-in-out"
+              className="text-gray-500 hover:text-red-500 transition-colors duration-300 ease-in-out"
             >
               <FaTimes size={18} />
             </button>
@@ -76,7 +76,7 @@ const Widget = () => {
             <div className="grid grid-cols-2 gap-2 mt-4">
               <button
                 onClick={() => toggleWidget("debt")}
-                className={`bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out shadow-md py-2 px-2 flex flex-col items-center rounded-lg text-xs ${
+                className={`bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out shadow-md py-2 px-2 flex flex-col items-center rounded-lg text-xs border border-orange-500 ${
                   activeWidget === "debt" ? "bg-gray-200" : ""
                 }`}
               >
@@ -87,7 +87,7 @@ const Widget = () => {
               </button>
               <button
                 onClick={() => toggleWidget("history")}
-                className={`bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out shadow-md py-2 px-2 flex flex-col items-center rounded-lg text-xs ${
+                className={`bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out shadow-md py-2 px-2 flex flex-col items-center rounded-lg text-xs border border-orange-500 ${
                   activeWidget === "history" ? "bg-gray-200" : ""
                 }`}
               >
@@ -98,7 +98,7 @@ const Widget = () => {
               </button>
               <button
                 onClick={() => toggleWidget("overview")}
-                className={`bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out shadow-md py-2 px-2 flex flex-col items-center rounded-lg text-xs ${
+                className={`bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out shadow-md py-2 px-2 flex flex-col items-center rounded-lg text-xs border border-orange-500 ${
                   activeWidget === "overview" ? "bg-gray-200" : ""
                 }`}
               >
@@ -109,7 +109,7 @@ const Widget = () => {
               </button>
               <button
                 onClick={() => toggleWidget("forms")}
-                className={`bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out shadow-md py-2 px-2 flex flex-col items-center rounded-lg text-xs ${
+                className={`bg-white hover:bg-gray-100 transition-transform duration-300 ease-in-out shadow-md py-2 px-2 flex flex-col items-center rounded-lg text-xs border border-orange-500 ${
                   activeWidget === "forms" ? "bg-gray-200" : ""
                 }`}
               >

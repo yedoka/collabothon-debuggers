@@ -1,69 +1,88 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { FaTimes } from "react-icons/fa"; // Import the close icon
 
 // Enhanced Tax Forms Widget with Detailed Input Fields
-const TaxFormsWidget = () => {
+// eslint-disable-next-line react/prop-types
+const TaxFormsWidget = ({ onClose }) => {
   // State to manage the forms
   const [forms, setForms] = useState([
-    { id: 1, name: 'VAT Form', status: 'in-progress', details: '' },
-    { id: 2, name: 'Income Tax Form', status: 'completed', details: 'Submitted on 2024-03-15' },
-    { id: 3, name: 'Corporate Tax Form', status: 'overdue', details: '' },
+    { id: 1, name: "VAT Form", status: "in-progress", details: "" },
+    {
+      id: 2,
+      name: "Income Tax Form",
+      status: "completed",
+      details: "Submitted on 2024-03-15",
+    },
+    { id: 3, name: "Corporate Tax Form", status: "overdue", details: "" },
   ]);
 
   const [selectedForm, setSelectedForm] = useState(null);
   const [formDetails, setFormDetails] = useState({
-    taxNumber: '',
-    income: '',
-    deductions: '',
-    dueDate: '',
-    notes: '',
+    taxNumber: "",
+    income: "",
+    deductions: "",
+    dueDate: "",
+    notes: "",
   });
   const [showFormDetails, setShowFormDetails] = useState(false);
 
   const handleFormSelect = (form) => {
     setSelectedForm(form);
     setFormDetails({
-      taxNumber: '', // Reset fields for editing
-      income: '',
-      deductions: '',
-      dueDate: '',
-      notes: '',
+      taxNumber: "", // Reset fields for editing
+      income: "",
+      deductions: "",
+      dueDate: "",
+      notes: "",
     });
     setShowFormDetails(true);
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormDetails(prevDetails => ({
+    setFormDetails((prevDetails) => ({
       ...prevDetails,
       [name]: value,
     }));
   };
 
   const handleSubmit = () => {
-    const updatedForms = forms.map(form =>
+    const updatedForms = forms.map((form) =>
       form.id === selectedForm.id
-        ? { ...form, status: 'completed', details: `Tax Number: ${formDetails.taxNumber}, Income: €${formDetails.income}, Deductions: €${formDetails.deductions}, Due Date: ${formDetails.dueDate}, Notes: ${formDetails.notes}` }
+        ? {
+            ...form,
+            status: "completed",
+            details: `Tax Number: ${formDetails.taxNumber}, Income: €${formDetails.income}, Deductions: €${formDetails.deductions}, Due Date: ${formDetails.dueDate}, Notes: ${formDetails.notes}`,
+          }
         : form
     );
     setForms(updatedForms);
     setShowFormDetails(false);
     setSelectedForm(null);
     setFormDetails({
-      taxNumber: '',
-      income: '',
-      deductions: '',
-      dueDate: '',
-      notes: '',
+      taxNumber: "",
+      income: "",
+      deductions: "",
+      dueDate: "",
+      notes: "",
     });
   };
 
   const handleDelete = (id) => {
-    const updatedForms = forms.filter(form => form.id !== id);
+    const updatedForms = forms.filter((form) => form.id !== id);
     setForms(updatedForms);
   };
 
   return (
-    <div className="max-w-lg mx-auto p-2 bg-white rounded-lg shadow-md transition-all duration-300">
+    <div className="relative max-w-lg mx-auto p-2 bg-white rounded-lg shadow-md transition-all duration-300">
+      {/* Close button in the top-right corner */}
+      <button
+        className="absolute top-2 right-2 text-gray-500 hover:text-red-500 transition-colors duration-300 ease-in-out"
+        onClick={onClose}
+      >
+        <FaTimes size={18} />
+      </button>
+
       <h2 className="text-xl font-semibold mb-2">Tax Forms and Filings</h2>
 
       <ul className="space-y-2">
@@ -71,7 +90,13 @@ const TaxFormsWidget = () => {
           <li
             key={form.id}
             className={`p-2 border rounded-md transition-all duration-300 
-              ${form.status === 'completed' ? 'bg-green-100' : form.status === 'overdue' ? 'bg-red-100' : 'bg-yellow-100'}`}
+              ${
+                form.status === "completed"
+                  ? "bg-green-100"
+                  : form.status === "overdue"
+                  ? "bg-red-100"
+                  : "bg-yellow-100"
+              }`}
           >
             <div className="flex justify-between items-center">
               <span className="font-bold">{form.name}</span>
@@ -80,7 +105,7 @@ const TaxFormsWidget = () => {
                   className="text-orange-500 hover:text-orange-600 mr-2"
                   onClick={() => handleFormSelect(form)}
                 >
-                  {form.status === 'completed' ? 'View Details' : 'Edit'}
+                  {form.status === "completed" ? "View Details" : "Edit"}
                 </button>
                 <button
                   className="text-red-500 hover:underline"
@@ -90,7 +115,13 @@ const TaxFormsWidget = () => {
                 </button>
               </div>
             </div>
-            <div className={`mt-1 transition-all duration-300 ${showFormDetails && selectedForm?.id === form.id ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
+            <div
+              className={`mt-1 transition-all duration-300 ${
+                showFormDetails && selectedForm?.id === form.id
+                  ? "opacity-100"
+                  : "opacity-0 h-0 overflow-hidden"
+              }`}
+            >
               {form.details && <p>{form.details}</p>}
             </div>
           </li>
@@ -99,7 +130,9 @@ const TaxFormsWidget = () => {
 
       {showFormDetails && selectedForm && (
         <div className="mt-2">
-          <h3 className="text-lg font-semibold">Fill Out {selectedForm.name}</h3>
+          <h3 className="text-lg font-semibold">
+            Fill Out {selectedForm.name}
+          </h3>
           <div className="space-y-2">
             <input
               type="text"
