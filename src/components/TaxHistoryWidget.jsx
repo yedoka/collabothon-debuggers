@@ -107,7 +107,7 @@ function TaxHistoryWidget({ onClose }) {
   };
 
   return (
-    <div className="w-96 p-4 bg-white rounded-lg shadow-md border relative">
+    <div className="w-[550px] p-4 bg-white rounded-lg shadow-md border relative">
       {/* Close button */}
       <button
         className="absolute top-2 right-2 text-gray-500 hover:text-red-500 transition-colors duration-300 ease-in-out"

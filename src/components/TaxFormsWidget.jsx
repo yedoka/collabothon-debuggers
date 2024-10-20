@@ -74,7 +74,7 @@ const TaxFormsWidget = ({ onClose }) => {
   };
 
   return (
-    <div className="relative max-w-lg mx-auto p-2 bg-white rounded-lg shadow-md transition-all duration-300">
+    <div className="relative w-96 mx-auto p-2 bg-white rounded-lg shadow-md transition-all duration-300">
       {/* Close button in the top-right corner */}
       <button
         className="absolute top-2 right-2 text-gray-500 hover:text-red-500 transition-colors duration-300 ease-in-out"
