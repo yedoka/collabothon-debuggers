@@ -7,7 +7,7 @@ const App = () => {
     <>
       <div className="flex flex-col min-h-screen bg-gradient-to-b from-[#F4ECE1] to-[#FCFBF7]">
         <Header />
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center p-4">
           <Widget />
         </div>
       </div>
